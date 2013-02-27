@@ -1,9 +1,0 @@
-<%- @renderTemplate "layout", title: "Error starting application", class: "big", => %>
-  <h1 class="err">Error starting application</h1>
-  <h2>Your Rack app raised an exception when Pow tried to run it.</h2>
-  <section>
-    <pre class="breakout small_text"><strong><%= @err %></strong>
-<%= @stack.join "\n" %><% if @rest: %>
-<a href="#" onclick="this.style.display='none',this.nextSibling.style.display='';return false">Show <%= @rest.length %> more lines</a><div style="display: none"><%= @rest.join "\n" %></div><% end %></pre>
-  </section>
-<% end %>
