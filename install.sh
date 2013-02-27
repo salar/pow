@@ -62,7 +62,7 @@
 
 # Create the Pow directory structure if it doesn't already exist.
 
-      mkdir -p "$POW_ROOT/Hosts" "$POW_ROOT/Versions"
+      mkdir -p "$POW_ROOT/Versions"
 
 
 # If the requested version of Pow is already installed, remove it first.
@@ -83,12 +83,6 @@
       ln -s Versions/$VERSION Current
 
 
-# Create the ~/.pow symlink if it doesn't exist.
-
-      cd "$HOME"
-      [[ -a .pow ]] || ln -s "$POW_ROOT/Hosts" .pow
-
-
 # Install local configuration files.
 
       echo "*** Installing local configuration files..."
@@ -105,7 +99,6 @@
       if [ $NEEDS_ROOT -eq 1 ]; then
         echo "*** Installing system configuration files as root..."
         sudo "$NODE_BIN" "$POW_BIN" --install-system
-        sudo launchctl load -Fw /Library/LaunchDaemons/cx.pow.firewall.plist 2>/dev/null
       fi
 
 

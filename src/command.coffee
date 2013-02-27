@@ -15,9 +15,6 @@ usage = ->
   console.error "usage: pow [--print-config | --install-local | --install-system [--dry-run]]"
   process.exit -1
 
-# Start by loading the user configuration from `~/.powconfig`, if it
-# exists. The user configuration affects both the installer and the
-# daemon.
 Configuration.getUserConfiguration (err, configuration) ->
   throw err if err
 

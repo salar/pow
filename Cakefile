@@ -24,14 +24,6 @@ buildTemplates = (callback) ->
         else fs.writeFile "lib/templates/#{name}.js", "module.exports = #{eco.precompile(data)}", callback
 
   async.parallel [
-    compile("http_server/application_not_found.html")
-    compile("http_server/error_starting_application.html")
-    compile("http_server/layout.html")
-    compile("http_server/proxy_error.html")
-    compile("http_server/rackup_file_missing.html")
-    compile("http_server/rvm_deprecation_notice.html")
-    compile("http_server/welcome.html")
-    compile("installer/cx.pow.firewall.plist")
     compile("installer/cx.pow.powd.plist")
     compile("installer/resolver")
   ], callback
@@ -78,12 +70,6 @@ task 'install', 'Install pow configuration files', ->
       else
         callback()
 
-  createHostsDirectory = (callback) ->
-    sh 'mkdir -p "$HOME/Library/Application Support/Pow/Hosts"', (err) ->
-      fs.stat "#{process.env['HOME']}/.pow", (err) ->
-        if err then sh 'ln -s "$HOME/Library/Application Support/Pow/Hosts" "$HOME/.pow"', callback
-        else callback()
-
   installLocal = (callback) ->
     console.error "*** Installing local configuration files..."
     sh "./bin/pow --install-local", callback
@@ -92,15 +78,11 @@ task 'install', 'Install pow configuration files', ->
     exec "./bin/pow --install-system --dry-run", (needsRoot) ->
       if needsRoot
         console.error "*** Installing system configuration files as root..."
-        sh "sudo ./bin/pow --install-system", (err) ->
-          if err
-            callback err
-          else
-            sh "sudo launchctl load /Library/LaunchDaemons/cx.pow.firewall.plist", callback
+        sh "sudo ./bin/pow --install-system", ->
       else
         callback()
 
-  async.parallel [createHostsDirectory, installLocal, installSystem], (err) ->
+  async.parallel [installLocal, installSystem], (err) ->
     throw err if err
     console.error "*** Installed"
 

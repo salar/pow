@@ -13,7 +13,6 @@ util     = require "util"
 # Import the Eco templates for the `/etc/resolver` and `launchd`
 # configuration files.
 resolverSource = require "./templates/installer/resolver"
-firewallSource = require "./templates/installer/cx.pow.firewall.plist"
 daemonSource   = require "./templates/installer/cx.pow.powd.plist"
 
 # `InstallerFile` represents a single file candidate for installation:
@@ -79,11 +78,7 @@ module.exports = class Installer
   # Factory method that takes a `Configuration` instance and returns
   # an `Installer` for system firewall and DNS configuration files.
   @getSystemInstaller: (@configuration) ->
-    files = [
-      new InstallerFile "/Library/LaunchDaemons/cx.pow.firewall.plist",
-        firewallSource(@configuration),
-        true
-    ]
+    files = []
 
     for domain in @configuration.domains
       files.push new InstallerFile "/etc/resolver/#{domain}",

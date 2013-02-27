@@ -20,9 +20,6 @@ module.exports =
   # [DnsServer](dns_server.html) handles incoming DNS queries.
   DnsServer:       require "./dns_server"
 
-  # [HttpServer](http_server.html) handles incoming HTTP requests.
-  HttpServer:      require "./http_server"
-
   # [Installer](installer.html) compiles and installs local and system
   # configuration files.
   Installer:       require "./installer"
@@ -30,10 +27,6 @@ module.exports =
   # [Logger](logger.html) instances keep track of everything that
   # happens during a Pow daemon's lifecycle.
   Logger:          require "./logger"
-
-  # [RackApplication](rack_application.html) represents a single
-  # running application.
-  RackApplication: require "./rack_application"
 
   # The [util](util.html) module contains various helper functions.
   util:            require "./util"
