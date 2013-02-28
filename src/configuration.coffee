@@ -9,23 +9,8 @@ async             = require "async"
 {getUserEnv}      = require "./util"
 
 module.exports = class Configuration
-  # Evaluates the user configuration script and calls the `callback`
-  # with the environment variables if the config file exists. Any
-  # script errors are passed along in the first argument. (No error
-  # occurs if the file does not exist.)
-  @loadUserConfigurationEnvironment: (callback) ->
-    getUserEnv (err, env) =>
-      if err
-        callback err
-      else
-        callback null, env
-
   @getUserConfiguration: (callback) ->
-    @loadUserConfigurationEnvironment (err, env) ->
-      if err
-        callback err
-      else
-        callback null, new Configuration env
+    callback new Configuration
 
   # A list of option names accessible on `Configuration` instances.
   @optionNames: ["bin", "dnsPort", "domains"]

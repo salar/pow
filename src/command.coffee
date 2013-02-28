@@ -15,9 +15,7 @@ usage = ->
   console.error "usage: pow [--print-config | --install-local | --install-system [--dry-run]]"
   process.exit -1
 
-Configuration.getUserConfiguration (err, configuration) ->
-  throw err if err
-
+Configuration.getUserConfiguration (configuration) ->
   printConfig = false
   createInstaller = null
   dryRun = false
