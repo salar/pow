@@ -24,9 +24,5 @@ module.exports =
   # configuration files.
   Installer:       require "./installer"
 
-  # [Logger](logger.html) instances keep track of everything that
-  # happens during a Pow daemon's lifecycle.
-  Logger:          require "./logger"
-
   # The [util](util.html) module contains various helper functions.
   util:            require "./util"

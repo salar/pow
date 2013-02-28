@@ -1,12 +1,9 @@
 # The `Configuration` class encapsulates various options for a Pow
-# daemon (port numbers, directories, etc.). It's also responsible for
-# creating `Logger` instances and mapping hostnames to application
-# root paths.
+# daemon (port numbers, directories, etc.).
 
 fs                = require "fs"
 path              = require "path"
 async             = require "async"
-Logger            = require "./logger"
 {mkdirp}          = require "./util"
 {sourceScriptEnv} = require "./util"
 {getUserEnv}      = require "./util"
@@ -31,12 +28,11 @@ module.exports = class Configuration
         callback null, new Configuration env
 
   # A list of option names accessible on `Configuration` instances.
-  @optionNames: ["bin", "dnsPort", "domains", "logRoot"]
+  @optionNames: ["bin", "dnsPort", "domains"]
 
   # Pass in any environment variables you'd like to override when
   # creating a `Configuration` instance.
   constructor: (env = process.env) ->
-    @loggers = {}
     @initialize env
 
   # Valid environment variables and their defaults:
@@ -59,10 +55,6 @@ module.exports = class Configuration
     # Allow for comma-separated domain lists, e.g. `POW_DOMAINS=dev,test`
     @domains    = @domains.split?(",")    ? @domains
 
-    # `POW_LOG_ROOT`: path to the directory that Pow will use to store
-    # its log files. Defaults to `~/Library/Logs/Pow`.
-    @logRoot    = env.POW_LOG_ROOT    ? libraryPath "Logs", "Pow"
-
     # ---
     # Precompile regular expressions for matching domain names to be
     # served by the DNS server and hosts to be served by the HTTP
@@ -75,15 +67,6 @@ module.exports = class Configuration
     result = {}
     result[key] = @[key] for key in @constructor.optionNames
     result
-
-  # Retrieve a `Logger` instance with the given `name`.
-  getLogger: (name) ->
-    @loggers[name] ||= new Logger path.join @logRoot, name + ".log"
-
-# Convenience wrapper for constructing paths to subdirectories of
-# `~/Library`.
-libraryPath = (args...) ->
-  path.join process.env.HOME, "Library", args...
 
 # Helper function for compiling a list of top-level domains into a
 # regular expression for matching purposes.
