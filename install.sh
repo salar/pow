@@ -135,7 +135,7 @@
         # network configuration.
         function check_domains() {
           for domain in ${POW_DOMAINS//,/$IFS}; do
-            echo | nc "${domain}." "$POW_DST_PORT" 2>/dev/null || return 1
+            echo | nc "${domain}." "80" 2>/dev/null || return 1
           done
         }
 
