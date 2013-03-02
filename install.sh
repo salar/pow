@@ -98,7 +98,7 @@
 
       if [ $NEEDS_ROOT -eq 1 ]; then
         echo "*** Installing system configuration files as root..."
-        sudo "$NODE_BIN" "$POW_BIN" --install-system
+        sudo -E "$NODE_BIN" "$POW_BIN" --install-system
       fi
 
 
