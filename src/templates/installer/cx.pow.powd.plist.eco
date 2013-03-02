@@ -13,5 +13,10 @@
         <true/>
         <key>RunAtLoad</key>
         <true/>
+        <key>EnvironmentVariables</key>
+        <dict>
+          <key>POW_DOMAINS</key>
+          <string><%= @domains %></string>
+        </dict>
 </dict>
 </plist>
