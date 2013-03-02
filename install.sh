@@ -146,10 +146,10 @@
         function reload_network_configuration() {
           echo "*** Reloading system network configuration..."
           local location=$(networksetup -getcurrentlocation)
-          networksetup -createlocation "pow$$" >/dev/null 2>&1
-          networksetup -switchtolocation "pow$$" >/dev/null 2>&1
-          networksetup -switchtolocation "$location" >/dev/null 2>&1
-          networksetup -deletelocation "pow$$" >/dev/null 2>&1
+          sudo networksetup -createlocation "pow$$" >/dev/null 2>&1
+          sudo networksetup -switchtolocation "pow$$" >/dev/null 2>&1
+          sudo networksetup -switchtolocation "$location" >/dev/null 2>&1
+          sudo networksetup -deletelocation "pow$$" >/dev/null 2>&1
         }
 
         # Try resolving and connecting to each configured domain. If
