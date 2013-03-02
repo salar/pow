@@ -130,12 +130,6 @@
         eval "$CONFIG"
         echo "*** Performing self-test..."
 
-        # Check to see if the server is running at all.
-        function check_status() {
-          sleep 1
-          curl -sH host:pow "localhost:$POW_HTTP_PORT/status.json" | grep -c "$VERSION" >/dev/null
-        }
-
         # Attempt to connect to Pow via each configured domain. If a
         # domain is inaccessible, try to force a reload of OS X's
         # network configuration.
@@ -156,13 +150,6 @@
           networksetup -switchtolocation "pow$$" >/dev/null 2>&1
           networksetup -switchtolocation "$location" >/dev/null 2>&1
           networksetup -deletelocation "pow$$" >/dev/null 2>&1
-        }
-
-        # Try twice to connect to Pow. Bail if it doesn't work.
-        check_status || check_status || {
-          echo "!!! Couldn't find a running Pow server on port $POW_HTTP_PORT"
-          print_troubleshooting_instructions
-          exit 1
         }
 
         # Try resolving and connecting to each configured domain. If
