@@ -1,41 +1,5 @@
 #!/bin/sh
-#                       W
-#                      R RW        W.
-#                    RW::::RW    DR::R
-#         :RRRRRWWWWRt:::::::RRR::::::E        jR
-#          R.::::::::::::::::::::::::::Ri  jiR:::R
-#           R:::::::.RERRRRWWRERR,::::::Efi:::::::R             GjRRR Rj
-#            R::::::.R             R:::::::::::::;G    RRj    WWR    RjRRRRj
-#            Rt::::WR      RRWR     R::::::::::::::::fWR::R;  WRW    RW    R
-#        WWWWRR:::EWR     E::W     WRRW:::EWRRR::::::::: RRED WR    RRW   RR
-#        'R:::::::RRR            RR     DWW   R::::::::RW   LRRR    WR    R
-#          RL:::::WRR       GRWRR        RR   R::WRiGRWW    RRR    RRR   R
-#            Ri:::WWD    RWRRRWW   WWR   LR   R W    RR    RRRR    RR    R
-#   RRRWWWWRE;,:::WW     R:::RW   RR:W   RR   ERE    RR    RRR    RRR    R
-#    RR:::::::::::RR    tR:::WR   Wf:R   RW    R     R     RRR    RR    R
-#      WR::::::::tRR    WR::RW   ER.R   RRR       R       RRRR    RR    R
-#         WE:::::RR     R:::RR   :RW   E RR      RW;     GRRR    RR    R
-#         R.::::,WR     R:::GRW       E::RR     WiWW     RRWR   LRRWWRR
-#       WR::::::RRRRWRG::::::RREWDWRj::::RW  ,WR::WR    iRWWWWWRWW    R
-#     LR:::::::::::::::::::::::::::::::::EWRR::::::RRRDi:::W    RR   R
-#    R:::::::::::::::::::::::::::::::::::::::::::::::::::tRW   RRRWWWW
-#  RRRRRRRRRRR::::::::::::::::::::::::::::::::::::,:::DE RRWRWW,
-#            R::::::::::::: RW::::::::R::::::::::RRWRRR
-#            R::::::::::WR.  ;R::::;R  RWi:::::ER
-#            R::::::.RR       Ri:iR       RR:,R
-#            E::: RE           RW           Y
-#            ERRR
-#            G       Zero-configuration Rack server for Mac OS X
-#                    http://pow.cx/
-#
-#     This is the installation script for Pow.
-#     See the full annotated source: http://pow.cx/docs/
-#
-#     Install Pow by running this command:
-#     curl get.pow.cx | sh
-#
-#     Uninstall Pow: :'(
-#     curl get.pow.cx/uninstall.sh | sh
+# PowDNS, a minimal DNS wildcard server based on Pow (pow.cx)
 
 
 # Set up the environment. Respect $VERSION if it's set.
@@ -104,7 +68,7 @@
 
 # Start (or restart) Pow.
 
-      echo "*** Starting the Pow server..."
+      echo "*** Starting the PowDNS server..."
       launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null || true
       launchctl load -Fw "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null
 
@@ -116,7 +80,7 @@
         echo "For troubleshooting instructions, please see the Pow wiki:"
         echo "https://github.com/37signals/pow/wiki/Troubleshooting"
         echo
-        echo "To uninstall Pow, \`curl get.pow.cx/uninstall.sh | sh\`"
+        echo "To uninstall PowDNS, \`curl get.pow.cx/uninstall.sh | sh\`"
       }
 
 
