@@ -48,6 +48,6 @@ module.exports = testCase
     daemon.start()
     touch restartFilename, ->
       daemon.once "restart", ->
-        path.exists restartFilename, (exists) ->
+        fs.exists restartFilename, (exists) ->
           test.ok !exists
           test.done()
